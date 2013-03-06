@@ -103,8 +103,13 @@
 	
 	<section id="main" class="column">
 		
+		<c:if test="${(message == 'modif')}">
+		<h4 class="alert_success">L'oeuvre a été modifiée avec succès</h4>
+		</c:if>
 		
-		
+		<c:if test="${(message == 'nonReservable')}">
+		<h4 class="alert_error">L'oeuvre a déjà été réservée</h4>
+		</c:if>
 		
 		<article class="module width_3_quarter">
 		<header><h3 class="tabs_involved">Liste des oeuvres</h3>

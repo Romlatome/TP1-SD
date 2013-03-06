@@ -103,6 +103,13 @@
 	
 	<section id="main" class="column">
 		
+		<c:if test="${(message == 'oeuvreConfirmee')}">
+		<h4 class="alert_success">La confirmation de la réservation a été enregistrée</h4>
+		</c:if>
+		
+		<c:if test="${(message == 'oeuvreDejaConfirmee')}">
+		<h4 class="alert_error">Cette oeuvre a déjà été confirmée</h4>
+		</c:if>
 		
 		
 		

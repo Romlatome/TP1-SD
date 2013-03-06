@@ -113,6 +113,62 @@ public class Reservation {
 
 
     /**
+     * Lire une reservation
+     * @return List<Reservation> Collection de Réservations
+     * @throws Exception
+     */
+    public void Lire(int id) throws Exception {
+    	PreparedStatement ps = null;
+    	ResultSet rs = null;
+    	Connection connection = null;
+    	
+
+        try {
+
+        	Connexion cnx = new Connexion();
+        	cnx.setConnexion();
+        	connection = cnx.getConnexion();
+        	
+        	ps =  connection.prepareStatement("Select * from reservation where id_oeuvrevente="+id);
+        	rs = ps.executeQuery();
+        	while (rs.next()){
+        		int id_oeuvre = rs.getInt("id_oeuvrevente");
+        		int id_adherent = rs.getInt("id_adherent");
+        		
+        		Oeuvre o = new Oeuvre();
+            	o.Lire_Id(id_oeuvre);
+            	this.setOeuvre(o);
+            	this.setId_oeuvre(o.getId_oeuvre());
+            	
+            	Adherent a = new Adherent();
+            	a.Lire_Id(id_adherent);
+            	this.setAdherent(a);
+            	this.setId_adherent(a.getId_adherent());
+        		
+            	this.setStatut(rs.getString("statut"));
+        		System.out.println("date"+rs.getString("date_reservation"));
+        		this.setDate_reservation(rs.getString("date_reservation"));
+       	} 
+        	
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }}
+    
+    /**
      * Liste des Réservations en Attente
      * @return List<Reservation> Collection de Réservations
      * @throws Exception
@@ -162,7 +218,6 @@ public class Reservation {
         }
         return lReservations;
     }
-
     /**
      * Met à jour une Réservation dans la base de données
      * @throws Exception

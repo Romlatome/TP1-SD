@@ -26,7 +26,13 @@
 <script src="js/hideshow.js" type="text/javascript"></script>
 <script src="js/jquery.tablesorter.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/jquery.equalHeight.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 <script type="text/javascript">
+$(function() {
+    $( "#datepicker" ).datepicker({ dateFormat: "yy-mm-dd" });
+  });
 	$(document).ready(function() {
 		$(".tablesorter").tablesorter();
 	});
@@ -125,7 +131,7 @@
 				<label>Prix</label> <input type="text" name="txtPrix" value="${oeuvreReservee.prix}" READONLY><br>
 			</fieldset>
 			<fieldset>
-				<label> Date réservation Format : AAAA/MM/JJ</label>  <input type="text" name="txtDate" value=""> <br>
+				<label> Date réservation Format : AAAA/MM/JJ</label>  <input type="text" name="txtDate" value="" id ="datepicker" READONLY> <br>
 			</fieldset>
 			<fieldset style="width: 48%; float: left; margin-right: 3%;">
 				<!-- to make two field float next to one another, adjust values accordingly -->

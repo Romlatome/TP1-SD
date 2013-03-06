@@ -125,12 +125,11 @@ public class userServlet extends HttpServlet {
 					// liste adherents
 					Adherent a = new Adherent();
 					ArrayList<Adherent> lAdherent = a.Liste(); 
-
 					request.setAttribute("listeAdherent",lAdherent);
 				}
 				else
 				{
-					System.out.println("Oeuvre non réservable");
+					request.setAttribute("message","nonReservable"); // message d'erreur pour dire qu'elle n'est pas reservable
 					pageReponse = "/userServlet?action=afficheOeuvre";
 				}
 			}
@@ -160,6 +159,8 @@ public class userServlet extends HttpServlet {
 				o.setTitre(titre);
 				o.Modifier();
 				pageReponse = "/userServlet?action=afficheOeuvre";
+				request.setAttribute("message","modif");
+				
 			}
 			else if (RESERVER_FIN_OEUVRE.equals(actionName)){
 				String id_oeuvre = request.getParameter("num");
@@ -188,9 +189,16 @@ public class userServlet extends HttpServlet {
 				pageReponse = "/userServlet?action=listereservation";
 				String num_oeuvre = request.getParameter("num");
 				Reservation r = new Reservation();
-				r.setId_oeuvre(Integer.parseInt(num_oeuvre));
-				
-				r.Modifier();
+				r.Lire(Integer.parseInt(num_oeuvre));
+			
+				// si elle n'est pas déjà confirmée
+				if(!r.getStatut().equals("Confirmee")){
+					request.setAttribute("message","oeuvreConfirmee");
+				r.Modifier();}
+				else
+				{
+					request.setAttribute("message","oeuvreDejaConfirmee");
+				}
 			}
 			
 			else
