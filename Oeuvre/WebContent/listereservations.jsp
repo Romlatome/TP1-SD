@@ -102,6 +102,10 @@
 	</aside><!-- end of sidebar -->
 	
 	<section id="main" class="column">
+	
+		<c:if test="${(message == 'oeuvreSupprimee')}">
+		<h4 class="alert_success">La réservation a été supprimée</h4>
+		</c:if>
 		
 		<c:if test="${(message == 'oeuvreConfirmee')}">
 		<h4 class="alert_success">La confirmation de la réservation a été enregistrée</h4>
@@ -138,7 +142,9 @@
 										<td>${liste.statut}</td>
 										<td>${liste.adherent.prenom_adherent} ${liste.adherent.nom_adherent}</td>
 										<td><a
-											href="userServlet?action=confirmerOeuvre&num=${liste.id_oeuvre}">Confirmer</a></td>
+											href="userServlet?action=confirmerOeuvre&num=${liste.id_oeuvre}">Confirmer</a>
+											<a
+											href="userServlet?action=supprReservation&num=${liste.id_oeuvre}">Supprimer</a></td>
 									</tr>
 								</c:forEach>
 			</tbody> 

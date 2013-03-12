@@ -134,7 +134,8 @@
 										<td>${liste.titre}</td>
 										<td>${liste.prix}</td>
 										<td>${liste.proprietaire.prenom_proprietaire} ${liste.proprietaire.nom_proprietaire}</td>
-										<td><a href="userServlet?action=Modifier&num=${liste.id_oeuvre}">Modifier</a><br><a href="userServlet?action=reserverOeuvre&num=${liste.id_oeuvre}">Reserver</a>
+										<td><a href="userServlet?action=Modifier&num=${liste.id_oeuvre}">Modifier</a>
+										<a href="userServlet?action=reserverOeuvre&num=${liste.id_oeuvre}">Reserver</a>
 										</td>
 										
 										</tr>

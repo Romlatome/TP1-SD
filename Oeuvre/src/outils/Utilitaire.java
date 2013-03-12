@@ -26,6 +26,7 @@ public class Utilitaire {
 	   // on définit un format de sortie  
 	   SimpleDateFormat defFormat = new SimpleDateFormat(unformat);
 	   datesortie = defFormat.parse(unedate);
+	   
 	   return datesortie;
 	}
 }

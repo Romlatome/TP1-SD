@@ -1,6 +1,8 @@
 package controleurs;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +37,7 @@ public class userServlet extends HttpServlet {
 	private static final String RESERVER_FIN_OEUVRE = "reservationliste";
 	private static final String LISTE_RESERVATION = "listereservation";
 	private static final String FIN_MODIFIER_OEUVRE = "modifOeuvre";
+	private static final String SUPPRIMER_OEUVRE_RESERVATION = "supprReservation";
 	private static final String ERROR_PAGE = null;
        
     /**
@@ -167,9 +170,11 @@ public class userServlet extends HttpServlet {
 				pageReponse = "/userServlet?action=listereservation";
 				String id_adherent = request.getParameter("lstAdherents");
 				String date = request.getParameter("txtDate");
-				System.out.println(date);
+				
 				Reservation r = new Reservation(Integer.parseInt(id_oeuvre),Integer.parseInt(id_adherent));
-				r.setDate_reservation(date);
+				
+				DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+				r.setDate_reservation(format.parse(date));
 				r.Ajouter();
 				
 				// mettre à la lettre R
@@ -184,6 +189,14 @@ public class userServlet extends HttpServlet {
 				ArrayList <Reservation> lReservation = r.Liste();
 				
 				request.setAttribute("listeReserv",lReservation);
+			}
+			else if (SUPPRIMER_OEUVRE_RESERVATION.equals(actionName)){
+				// supprime une oeuvre de la reservation
+				String num_oeuvre = request.getParameter("num");
+				Reservation r = new Reservation();
+				r.supprimerReservation(Integer.parseInt(num_oeuvre));
+				pageReponse = "/userServlet?action=listereservation";
+				request.setAttribute("message","oeuvreSupprimee");
 			}
 			else if (CONFIRMER_RESERVER_OEUVRE.equals(actionName)){
 				pageReponse = "/userServlet?action=listereservation";
