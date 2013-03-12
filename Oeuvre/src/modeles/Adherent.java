@@ -22,10 +22,10 @@ public class Adherent {
     private int id_adherent;
     private String nom_adherent;
     private String prenom_adherent;
-
     public Adherent() {
     }
-
+    
+    
     /**
      * @return the id_adherent
      */
